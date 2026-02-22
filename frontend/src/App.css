@@ -1,0 +1,235 @@
+/* 1. Global Reset & Layout */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: #1e293b;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* 2. Map Container */
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 3. Glassmorphism Sidebar */
+.sidebar {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 2;
+  
+  /* The Frosted Glass Effect */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  
+  width: 360px;
+  max-height: calc(100vh - 48px);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Scrollbar styling for a cleaner look */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+/* 4. Input Group & Inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  font-size: 15px;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-group input:first-child {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* The floating Swap Button */
+.swap-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.swap-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* 5. Primary Action Button */
+.submit-btn {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px;
+  width: 100%;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
+}
+
+.submit-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.error {
+  color: #ef4444;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+/* 6. Route Cards (Tiles) */
+.results {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.route-card {
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  
+  /* Soft Glass Layer for the cards themselves */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Micro-animation on hover */
+.route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.route-card h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.route-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+/* Weather & Pollution Divider */
+.route-card p:last-child {
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  margin-top: 4px;
+  font-weight: 500;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 7. Modern Color Combinations */
+
+/* Fastest: Electric Blue theme */
+.fastest { 
+  border-left: 6px solid #3b82f6; 
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.7), rgba(255, 255, 255, 0.5));
+}
+
+/* Healthiest: Emerald Green theme */
+.healthiest { 
+  border-left: 6px solid #10b981; 
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.7), rgba(255, 255, 255, 0.5));
+}
+
+/* Second Healthiest: Warm Amber theme */
+.second-healthiest { 
+  border-left: 6px solid #f59e0b; 
+  background: linear-gradient(135deg, rgba(255, 251, 235, 0.7), rgba(255, 255, 255, 0.5));
+}
