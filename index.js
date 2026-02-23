@@ -1,10 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const turf = require('@turf/turf'); 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
+
 
 // --- INSERT YOUR API KEYS HERE ---
 const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN;
